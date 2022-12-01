@@ -1,0 +1,15 @@
+plugins {
+	id 'java'
+}
+
+group = 'com.kulkard1'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+ implementation 'io.projectreactor:reactor-core:3.4.18'
+}

@@ -9,7 +9,26 @@ public class RockPaperScissors {
     public RockPaperScissors(String line) {
         String[] moves = line.split(" ");
         this.opponentMove = moves[0];
-        this.move = moves[1];
+        this.move = getMoveFromResult(moves[1]);
+    }
+
+    private String getMoveFromResult(String result) {
+        return switch (result) {
+            case "X" -> switch(this.opponentMove) {
+                case "A" -> "C";
+                case "B" -> "A";
+                case "C" -> "B";
+                default -> throw new RuntimeException("Unknown");
+            };
+            case "Y" -> this.opponentMove;
+            case "Z" -> switch(this.opponentMove) {
+                case "A" -> "B";
+                case "B" -> "C";
+                case "C" -> "A";
+                default -> throw new RuntimeException("Unknown");
+            };
+            default -> throw new RuntimeException("Unknown");
+        };
     }
 
     public int getScore() {
@@ -18,9 +37,9 @@ public class RockPaperScissors {
 
     private int getMovePoints() {
         return switch (this.move) {
-            case "X" -> 1;
-            case "Y" -> 2;
-            case "Z" -> 3;
+            case "A" -> 1;
+            case "B" -> 2;
+            case "C" -> 3;
             default -> throw new RuntimeException("Unknown");
         };
     }
@@ -28,21 +47,21 @@ public class RockPaperScissors {
     private int getResultPoints() {
         return switch (this.opponentMove) {
             case "A" -> switch(this.move) {
-                case "X" -> 3;
-                case "Y" -> 6;
-                case "Z" -> 0;
+                case "A" -> 3;
+                case "B" -> 6;
+                case "C" -> 0;
                 default -> throw new RuntimeException("Unknown");
             };
             case "B" -> switch(this.move) {
-                case "X" -> 0;
-                case "Y" -> 3;
-                case "Z" -> 6;
+                case "A" -> 0;
+                case "B" -> 3;
+                case "C" -> 6;
                 default -> throw new RuntimeException("Unknown");
             };
             case "C" -> switch(this.move) {
-                case "X" -> 6;
-                case "Y" -> 0;
-                case "Z" -> 3;
+                case "A" -> 6;
+                case "B" -> 0;
+                case "C" -> 3;
                 default -> throw new RuntimeException("Unknown");
             };
             default -> throw new RuntimeException("Unknown");

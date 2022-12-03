@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class Day3Solution2 {
@@ -15,18 +14,15 @@ public class Day3Solution2 {
             final int sum = Flux.fromStream(linesStream)
                     .map(Rucksack::new)
                     .buffer(3)
-                    .map(rucksacksByElfGroupList -> {
-                        final List<Integer> allItemsPriority0 = rucksacksByElfGroupList.get(0).getAllItemsPriority();
-                        final List<Integer> allItemsPriority1 = rucksacksByElfGroupList.get(1).getAllItemsPriority();
-                        final List<Integer> allItemsPriority2 = rucksacksByElfGroupList.get(2).getAllItemsPriority();
-                        return allItemsPriority0
-                                .stream()
-                                .distinct()
-                                .filter(allItemsPriority1::contains)
-                                .filter(allItemsPriority2::contains)
-                                .findFirst()
-                                .orElseThrow();
-                    })
+                    .map(rucksacksByElfGroupList -> rucksacksByElfGroupList
+                            .get(0)
+                            .getAllItemsPriority()
+                            .stream()
+                            .distinct()
+                            .filter(rucksacksByElfGroupList.get(1).getAllItemsPriority()::contains)
+                            .filter(rucksacksByElfGroupList.get(2).getAllItemsPriority()::contains)
+                            .findFirst()
+                            .orElseThrow())
                     .toStream()
                     .mapToInt(i -> i)
                     .sum();

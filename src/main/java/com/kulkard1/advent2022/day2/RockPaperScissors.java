@@ -2,9 +2,9 @@ package com.kulkard1.advent2022.day2;
 
 public class RockPaperScissors {
 
-    String opponentMove;
+    private final String opponentMove;
 
-    String move;
+    private final String move;
 
     public RockPaperScissors(String line) {
         String[] moves = line.split(" ");

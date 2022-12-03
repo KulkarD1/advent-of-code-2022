@@ -14,7 +14,7 @@ public class Day1Solution1 {
         try (final Stream<String> linesStream = Files.lines(Paths.get(ClassLoader.getSystemResource("day-1-input").toURI()))) {
             final int max = Flux.fromStream(linesStream)
                     .bufferUntil(String::isEmpty)
-                    .map(list -> list.stream().filter(line -> !line.isEmpty()).mapToInt(Integer::parseInt).sum())
+                    .map(caloriesPerElfList -> caloriesPerElfList.stream().filter(line -> !line.isEmpty()).mapToInt(Integer::parseInt).sum())
                     .toStream()
                     .mapToInt(i -> i)
                     .max()

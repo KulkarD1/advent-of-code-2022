@@ -12,15 +12,12 @@ public class Day1Solution1 {
 
     public static void main(String... args) throws IOException, URISyntaxException {
         try (final Stream<String> linesStream = Files.lines(Paths.get(ClassLoader.getSystemResource("day-1-input").toURI()))) {
-            final int max = Flux.fromStream(linesStream)
+            Flux.fromStream(linesStream)
                     .bufferUntil(String::isEmpty)
                     .map(caloriesPerElfList -> caloriesPerElfList.stream().filter(line -> !line.isEmpty()).mapToInt(Integer::parseInt).sum())
-                    .toStream()
-                    .mapToInt(i -> i)
-                    .max()
-                    .orElseThrow();
-
-            System.out.println("max = " + max);
+                    .reduce(0, Integer::max)
+                    .doOnNext(System.out::println)
+                    .subscribe();
         }
 
     }

@@ -4,14 +4,14 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
-public class Crane {
+public class CraneInstruction {
     private final Integer howMany;
 
     private final Integer fromStackIndex;
 
     private final Integer toStackIndex;
 
-    public Crane(String instruction) {
+    public CraneInstruction(String instruction) {
         this.howMany = Integer.valueOf(instruction.substring(instruction.indexOf("move ") + 5, instruction.indexOf("from")).trim());
         this.fromStackIndex = Integer.valueOf(instruction.substring(instruction.indexOf("from ") + 5, instruction.indexOf("to")).trim());
         this.toStackIndex = Integer.valueOf(instruction.substring(instruction.indexOf("to ") + 3));
@@ -23,7 +23,7 @@ public class Crane {
         Stack<String> containerStackToMove = new Stack<>();
         IntStream.rangeClosed(1, howMany)
             .forEach(index -> containerStackToMove.push(fromStack.pop()));
-        IntStream.rangeClosed(1, howMany)
+        IntStream.rangeClosed(1, containerStackToMove.size())
                 .forEach(index -> toStack.push(containerStackToMove.pop()));
     }
 }

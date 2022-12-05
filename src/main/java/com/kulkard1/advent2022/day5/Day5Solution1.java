@@ -20,8 +20,8 @@ public class Day5Solution1 {
             fillStacks(inputLines, 0);
             inputLines.stream()
                 .skip(craneInstructionIndex)
-                .map(Crane::new)
-                .forEach(crane -> crane.execute(stacksMap));
+                .map(CraneInstruction::new)
+                .forEach(craneInstruction -> craneInstruction.execute(stacksMap));
         }
         final String collect = IntStream.rangeClosed(1, stacksMap.keySet().size())
                 .mapToObj(stackId -> stacksMap.get(stackId).peek())

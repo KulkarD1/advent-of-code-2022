@@ -8,7 +8,9 @@ import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class Day5Solution1 {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class Day5Solution {
 
     private static final Map<Integer, Stack<String>> stacksMap = new HashMap<>();
 
@@ -26,7 +28,7 @@ public class Day5Solution1 {
         final String collect = IntStream.rangeClosed(1, stacksMap.keySet().size())
                 .mapToObj(stackId -> stacksMap.get(stackId).peek())
                 .reduce("", (s1, s2) -> s1 + s2);
-        System.out.println("collect = " + collect);
+        assertEquals("JSDHQMZGF", collect);
     }
 
     private static void fillStacks(List<String> inputLines, int readIndex) {

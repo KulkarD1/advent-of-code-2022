@@ -20,7 +20,10 @@ public class Crane {
     public void execute(Map<Integer, Stack<String>> stacksMap) {
         Stack<String> fromStack = stacksMap.get(fromStackIndex);
         Stack<String> toStack = stacksMap.get(toStackIndex);
+        Stack<String> containerStackToMove = new Stack<>();
         IntStream.rangeClosed(1, howMany)
-            .forEach(index -> toStack.push(fromStack.pop()));
+            .forEach(index -> containerStackToMove.push(fromStack.pop()));
+        IntStream.rangeClosed(1, howMany)
+                .forEach(index -> toStack.push(containerStackToMove.pop()));
     }
 }

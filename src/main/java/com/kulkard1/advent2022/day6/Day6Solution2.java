@@ -10,10 +10,10 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Day6Solution1 {
+public class Day6Solution2 {
 
     public static void main(String... args) throws IOException, URISyntaxException {
-        final int block = 4;
+        final int block = 14;
         final String input = Files.readString(Paths.get(ClassLoader.getSystemResource("day-6-input").toURI()));
         final int first = IntStream.range(0, input.length())
                 .filter(index -> {
@@ -21,7 +21,8 @@ public class Day6Solution1 {
                     return Arrays.stream(substring.split("")).collect(Collectors.toSet()).size() == block;
                 })
                 .findFirst()
-                .orElseThrow() + block;
-        assertEquals(1356, first);
+                .orElseThrow();
+        System.out.println("first = " + (first + block));
+        assertEquals(2564, first);
     }
 }

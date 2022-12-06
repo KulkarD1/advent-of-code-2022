@@ -16,12 +16,10 @@ public class Day6Solution1 {
         final int block = 4;
         final String input = Files.readString(Paths.get(ClassLoader.getSystemResource("day-6-input").toURI()));
         final int first = IntStream.range(0, input.length())
-                .filter(index -> {
-                    final String substring = input.substring(index, index + block);
-                    return Arrays.stream(substring.split("")).collect(Collectors.toSet()).size() == block;
-                })
+                .filter(index -> Arrays.stream(input.substring(index, index + block).split("")).collect(Collectors.toSet()).size() == block)
+                .map(i -> i + block)
                 .findFirst()
-                .orElseThrow() + block;
+                .orElseThrow();
         assertEquals(1356, first);
     }
 }

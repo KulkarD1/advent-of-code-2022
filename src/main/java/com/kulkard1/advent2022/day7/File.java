@@ -43,4 +43,8 @@ public class File {
         }
     }
 
+    public File getRoot() {
+        return parent == null ? this : this.getParent().getRoot();
+    }
+
 }

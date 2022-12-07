@@ -51,8 +51,7 @@ public class Day7Solution1 {
                     }
                 }
             );
-            final long sum =fileSystem.getDirectories().stream().mapToLong(File::getSize).filter(size -> size <= 100000).sum();
-            assertEquals(1845346, sum);
+            assertEquals(1845346, fileSystem.getDirectories().stream().mapToLong(File::getSize).filter(size -> size <= 100000).sum());
         }
     }
 }

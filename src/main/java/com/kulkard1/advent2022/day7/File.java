@@ -30,17 +30,13 @@ public class File {
     }
 
     public Set<File> getDirectories() {
-        if(children.stream().noneMatch(File::isDirectory)) {
-            return Set.of(this);
-        } else {
-            Set<File> collect = children
-                    .stream()
-                    .filter(File::isDirectory)
-                    .flatMap(directories -> directories.getDirectories().stream())
-                    .collect(Collectors.toSet());
-            collect.add(this);
-            return collect;
-        }
+        Set<File> collect = children
+                .stream()
+                .filter(File::isDirectory)
+                .flatMap(directories -> directories.getDirectories().stream())
+                .collect(Collectors.toSet());
+        collect.add(this);
+        return collect;
     }
 
     public File getRoot() {

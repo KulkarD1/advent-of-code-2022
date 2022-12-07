@@ -11,19 +11,19 @@ import java.util.stream.Collectors;
 
 @Data
 public class File {
-    private boolean directory;
+    private final boolean directory;
 
-    private String name;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private long size;
-
-    private File parent;
+    private final String name;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Set<File> children = new HashSet<>();
+    private final long size;
+
+    private final File parent;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private final Set<File> children = new HashSet<>();
 
     public long getSize() {
         return directory ? children.stream().map(File::getSize).mapToLong(i -> i).sum() : size;
@@ -42,4 +42,5 @@ public class File {
             return collect;
         }
     }
+
 }

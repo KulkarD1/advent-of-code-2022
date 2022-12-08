@@ -6,11 +6,15 @@ import java.util.stream.IntStream;
 
 public record Tree(int rowIndex, int columnIndex, int height) {
 
-    public boolean isOnTheEdge(List<List<Integer>> grid) {
+    public boolean isVisible(List<List<Integer>> grid) {
+        return this.isOnTheEdge(grid) || this.isVisibleFromTheInterior(grid);
+    }
+
+    private boolean isOnTheEdge(List<List<Integer>> grid) {
         return columnIndex == 0 || columnIndex == (grid.size() - 1) || rowIndex == 0 || rowIndex == (grid.get(rowIndex).size() - 1);
     }
 
-    public boolean isVisibleFromTheInterior(List<List<Integer>> grid) {
+    private boolean isVisibleFromTheInterior(List<List<Integer>> grid) {
         final boolean leftVisibility = IntStream.range(0, columnIndex)
                 .map(columnIndexToCompare -> grid.get(rowIndex).get(columnIndexToCompare))
                 .allMatch(heightToCompare -> heightToCompare < height);

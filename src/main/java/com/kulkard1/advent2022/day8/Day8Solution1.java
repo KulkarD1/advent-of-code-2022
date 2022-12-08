@@ -26,6 +26,15 @@ public class Day8Solution1 {
                 .count()
                 .doOnNext(count -> assertEquals(1676, count))
                 .subscribe();
+
+            final long maxScenicScore = Flux.range(0, grid.size())
+                    .flatMap(rowIndex -> Flux.combineLatest(gridCoordinates -> new Tree((Integer) gridCoordinates[0], (Integer) gridCoordinates[1], grid.get((Integer) gridCoordinates[0]).get((Integer) gridCoordinates[1])), Mono.just(rowIndex), Flux.range(0, grid.get(rowIndex).size())))
+                    .map(tree -> tree.getScenicScore(grid))
+                    .toStream()
+                    .mapToLong(i -> i)
+                    .max()
+                    .orElseThrow();
+            assertEquals(313200, maxScenicScore);
         }
     }
 }

@@ -13,16 +13,16 @@ public class Day7Solution1 {
     public static void main(String... args) throws IOException, URISyntaxException {
         try (final Stream<String> linesStream = Files.lines(Paths.get(ClassLoader.getSystemResource("day-7-input").toURI()))) {
             final long sum = linesStream
-                                .map(Command::new)
-                                .reduce(new File(true, "/", -1, null),
-                                        (currentFileSystem, command) -> command.execute(currentFileSystem),
-                                        (fileSystem1, fileSystem2) -> fileSystem1.getRoot())
-                                .getRoot()
-                                .getDirectories()
-                                .stream()
-                                .mapToLong(File::getSize)
-                                .filter(size -> size <= 100000)
-                                .sum();
+                .map(Command::new)
+                .reduce(new File(true, "/", -1, null),
+                        (currentFileSystem, command) -> command.execute(currentFileSystem),
+                        (fileSystem1, fileSystem2) -> fileSystem1.getRoot())
+                .getRoot()
+                .getDirectories()
+                .stream()
+                .mapToLong(File::getSize)
+                .filter(size -> size <= 100000)
+                .sum();
             assertEquals(1845346, sum);
         }
     }

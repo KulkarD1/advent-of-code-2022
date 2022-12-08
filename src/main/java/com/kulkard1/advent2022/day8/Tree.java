@@ -1,16 +1,9 @@
 package com.kulkard1.advent2022.day8;
 
-import lombok.Data;
-
 import java.util.List;
 import java.util.stream.IntStream;
 
-@Data
-public class Tree {
-
-    private final int rowIndex;
-    private final int columnIndex;
-    private final int height;
+public record Tree(int rowIndex, int columnIndex, int height) {
 
     public boolean isOnTheEdge(List<List<Integer>> grid) {
         return columnIndex == 0 || columnIndex == (grid.size() - 1) || rowIndex == 0 || rowIndex == (grid.get(rowIndex).size() - 1);

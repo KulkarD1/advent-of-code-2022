@@ -20,8 +20,7 @@ public class Day7Solution2 {
                                                     (currentFileSystem, command) -> command.execute(currentFileSystem),
                                                     (fileSystem1, fileSystem2) -> fileSystem1.getRoot())
                                             .getRoot();
-            long availableSpace = 70000000L - fileSystemRoot.getRoot().getSize();
-            long requiredFreeUp = 30000000L - availableSpace;
+            long requiredFreeUp = 30000000L - (70000000L - fileSystemRoot.getRoot().getSize());
             final Long requiredSize = fileSystemRoot
                     .getDirectories()
                     .stream()

@@ -21,7 +21,7 @@ public class Day8Solution1 {
                     .toList();
 
             Flux.range(0, grid.size())
-                .flatMap(index -> Flux.combineLatest(arr -> new Tree((Integer) arr[0], (Integer) arr[1], grid.get((Integer) arr[0]).get((Integer) arr[1])), Mono.just(index), Flux.range(0, grid.get(index).size())))
+                .flatMap(rowIndex -> Flux.combineLatest(gridCoordinates -> new Tree((Integer) gridCoordinates[0], (Integer) gridCoordinates[1], grid.get((Integer) gridCoordinates[0]).get((Integer) gridCoordinates[1])), Mono.just(rowIndex), Flux.range(0, grid.get(rowIndex).size())))
                 .filter(tree -> tree.isOnTheEdge(grid) || tree.isVisibleFromTheInterior(grid))
                 .count()
                 .doOnNext(count -> assertEquals(1676, count))

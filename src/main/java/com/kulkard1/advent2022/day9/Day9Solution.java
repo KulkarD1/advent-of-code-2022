@@ -21,8 +21,8 @@ public class Day9Solution {
         try (final Stream<String> linesStream = Files.lines(Paths.get(ClassLoader.getSystemResource("day-9-input").toURI()))) {
             final int answer2 = linesStream
                     .reduce(new Rope(10), Rope::executeCommand, (rope1, rope2) -> rope1).getTAIL_VISITS().size();
-            System.out.println("answer2 = " + answer2);
             assertNotEquals(2414, answer2); //too low
+            assertEquals(2651, answer2); //too low
         }
 
     }

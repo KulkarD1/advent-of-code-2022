@@ -50,34 +50,38 @@ public class Rope {
         GridCoordinate movedHeadPosition = position == 0 ? headPosition : tailPosition.get(position - 1);
         GridCoordinate tailPositionToMove = tailPosition.get(position);
         position++;
-        if(Math.abs(tailPositionToMove.getColumn() - movedHeadPosition.getColumn()) == 2 && tailPositionToMove.getRow().equals(movedHeadPosition.getRow())) {
-            int step = tailPositionToMove.getColumn() > movedHeadPosition.getColumn() ? -1 : 1;
-            tailPositionToMove.setColumn(tailPositionToMove.getColumn() + step);
-            if(position == tailPosition.size()) {
-                TAIL_VISITS.add(new GridCoordinate(tailPositionToMove.getRow(), tailPositionToMove.getColumn()));
+        if(Math.abs(tailPositionToMove.getColumn() - movedHeadPosition.getColumn()) == 2) {
+            //move 1 horizontal
+            if (tailPositionToMove.getColumn() > movedHeadPosition.getColumn()) {
+                tailPositionToMove.moveLeft();
+            } else {
+                tailPositionToMove.moveRight();
             }
-        } else if(Math.abs(tailPositionToMove.getRow() - movedHeadPosition.getRow()) == 2 && tailPositionToMove.getColumn().equals(movedHeadPosition.getColumn())) {
-            int step = tailPositionToMove.getRow() > movedHeadPosition.getRow() ? -1 : 1;
-            tailPositionToMove.setRow(tailPositionToMove.getRow() + step);
-            if(position == tailPosition.size()) {
-                TAIL_VISITS.add(new GridCoordinate(tailPositionToMove.getRow(), tailPositionToMove.getColumn()));
+            if(!tailPositionToMove.getRow().equals(movedHeadPosition.getRow())) {
+                if (tailPositionToMove.getRow() > movedHeadPosition.getRow()) {
+                    tailPositionToMove.moveUp();
+                } else {
+                    tailPositionToMove.moveDown();
+                }
             }
-        } else if(Math.abs(tailPositionToMove.getColumn() - movedHeadPosition.getColumn()) == 2) {
-            //diagonal
-            tailPositionToMove.setRow(movedHeadPosition.getRow());
-            int step = tailPositionToMove.getColumn() > movedHeadPosition.getColumn() ? -1 : 1;
-            tailPositionToMove.setColumn(tailPositionToMove.getColumn() + step);
-            if(position == tailPosition.size()) {
-                TAIL_VISITS.add(new GridCoordinate(tailPositionToMove.getRow(), tailPositionToMove.getColumn()));
+        }
+        if(Math.abs(tailPositionToMove.getRow() - movedHeadPosition.getRow()) == 2) {
+            //move 1 vertical
+            if (tailPositionToMove.getRow() > movedHeadPosition.getRow()) {
+                tailPositionToMove.moveUp();
+            } else {
+                tailPositionToMove.moveDown();
             }
-        } else if(Math.abs(tailPositionToMove.getRow() - movedHeadPosition.getRow()) == 2) {
-            //diagonal
-            tailPositionToMove.setColumn(movedHeadPosition.getColumn());
-            int step = tailPositionToMove.getRow() > movedHeadPosition.getRow() ? -1 : 1;
-            tailPositionToMove.setRow(tailPositionToMove.getRow() + step);
-            if(position == tailPosition.size()) {
-                TAIL_VISITS.add(new GridCoordinate(tailPositionToMove.getRow(), tailPositionToMove.getColumn()));
+            if(!tailPositionToMove.getColumn().equals(movedHeadPosition.getColumn())) {
+                if (tailPositionToMove.getColumn() > movedHeadPosition.getColumn()) {
+                    tailPositionToMove.moveLeft();
+                } else {
+                    tailPositionToMove.moveRight();
+                }
             }
+        }
+        if(position == tailPosition.size()) {
+            TAIL_VISITS.add(new GridCoordinate(tailPositionToMove.getRow(), tailPositionToMove.getColumn()));
         }
         if(position < tailPosition.size()) {
             moveTail(position);

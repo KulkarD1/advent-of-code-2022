@@ -10,4 +10,20 @@ public class GridCoordinate {
 
     private Integer column;
 
+    public void moveRight() {
+        column++;
+    }
+
+    public void moveLeft() {
+        column--;
+    }
+
+    public void moveUp() {
+        row--;
+    }
+
+    public void moveDown() {
+        row++;
+    }
+
 }

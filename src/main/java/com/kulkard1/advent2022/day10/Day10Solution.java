@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Day10Solution1 {
+public class Day10Solution {
     public static void main(String... args) throws IOException, URISyntaxException {
         try (final Stream<String> linesStream = Files.lines(Paths.get(ClassLoader.getSystemResource("day-10-input").toURI()))) {
 

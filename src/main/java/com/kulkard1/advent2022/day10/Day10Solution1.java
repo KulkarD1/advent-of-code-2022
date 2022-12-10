@@ -15,7 +15,6 @@ public class Day10Solution1 {
             Program program = new Program();
             linesStream.forEach(program::executeInstruction);
             final int cumulativeSignalStrength = program.getCumulativeSignalStrength();
-            System.out.println("cumulativeSignalStrength = " + cumulativeSignalStrength);
             assertEquals(13760, cumulativeSignalStrength);
         }
     }

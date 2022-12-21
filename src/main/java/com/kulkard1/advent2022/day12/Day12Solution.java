@@ -17,7 +17,7 @@ public class Day12Solution {
             List<List<GridCoordinate>> grid = new ArrayList<>();
             linesStream.forEach(line -> {
                 final List<GridCoordinate> row = IntStream.range(0, line.length())
-                        .mapToObj(column -> new GridCoordinate(grid.size(), column, line.charAt(column)))
+                        .mapToObj(column -> new GridCoordinate((short) grid.size(), (short) column, (short) line.charAt(column)))
                         .peek(gridCoordinate -> {
                             if(gridCoordinate.getValue() == 83) {
                                 start.set(gridCoordinate);
@@ -33,8 +33,9 @@ public class Day12Solution {
     }
 
     public static Optional<GridCoordinate> search(GridCoordinate root, List<List<GridCoordinate>> grid) {
-        Queue<GridCoordinate> queue = new ArrayDeque<>();
-
+        Queue<GridCoordinate> queue = new PriorityQueue<>(1000000000, Comparator.comparing(GridCoordinate::getWeight).reversed());
+        //Queue<GridCoordinate> queue = new ArrayDeque<>(1000000000);
+        Optional<GridCoordinate> likelyCoordinate = Optional.empty();
         queue.add(root);
         GridCoordinate currentCoordinate;
         while(!queue.isEmpty()) {
@@ -46,6 +47,6 @@ public class Day12Solution {
                 queue.addAll(currentCoordinate.getPossiblePaths(grid));
             }
         }
-        return Optional.empty();
+        return likelyCoordinate;
     }
 }

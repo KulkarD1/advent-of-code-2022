@@ -2,22 +2,23 @@ package com.kulkard1.advent2022.day12;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Data
 public class GridCoordinate {
-    private final Integer row;
+    private final short row;
 
-    private final Integer column;
+    private final short column;
 
-    private final int value;
+    private final short value;
 
     private boolean visited;
 
-    private int depth;
+    private short depth;
+
+    public int getWeight() {
+        return row + column - depth;
+    }
 
     public int getElevation() {
         return switch (value) {
@@ -77,7 +78,7 @@ public class GridCoordinate {
         left.ifPresent(possibleMoves::add);
         up.ifPresent(possibleMoves::add);
         down.ifPresent(possibleMoves::add);
-        possibleMoves.forEach(gridCoordinate -> gridCoordinate.setDepth(this.getDepth() + 1));
+        possibleMoves.forEach(gridCoordinate -> gridCoordinate.setDepth((short) (this.getDepth() + 1)));
         return possibleMoves;
     }
 }

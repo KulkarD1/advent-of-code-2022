@@ -44,7 +44,10 @@ public class Day12Solution {
                 return Optional.of(currentCoordinate);
             } else {
                 currentCoordinate.setVisited(true);
-                queue.addAll(currentCoordinate.getPossiblePaths(grid));
+                List<GridCoordinate> possiblePaths = currentCoordinate.getPossiblePaths(grid);
+                short currentDepth = currentCoordinate.getDepth();
+                possiblePaths.forEach(gridCoordinate -> gridCoordinate.setDepth((short) (currentDepth + 1)));
+                queue.addAll(possiblePaths);
             }
         }
         return likelyCoordinate;

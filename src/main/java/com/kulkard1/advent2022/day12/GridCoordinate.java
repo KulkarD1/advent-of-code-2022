@@ -68,7 +68,7 @@ public class GridCoordinate {
         return Optional.empty();
     }
 
-    public Collection<? extends GridCoordinate> getPossiblePaths(List<List<GridCoordinate>> grid) {
+    public List<GridCoordinate> getPossiblePaths(List<List<GridCoordinate>> grid) {
         List<GridCoordinate> possibleMoves = new ArrayList<>();
         Optional<GridCoordinate> right = moveRight(grid);
         Optional<GridCoordinate> left = moveLeft(grid);

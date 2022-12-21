@@ -28,7 +28,6 @@ public class Day12Solution {
                         .collect(Collectors.toList());
                 grid.add(row);
             });
-            //System.out.println("grid = " + grid);
             GridCoordinate endShortestDepth = search(start.get(), grid).orElseThrow();
             System.out.println(endShortestDepth);
             assertEquals(447, endShortestDepth.getDepth());

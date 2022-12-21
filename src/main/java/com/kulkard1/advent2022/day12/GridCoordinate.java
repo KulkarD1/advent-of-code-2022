@@ -1,6 +1,7 @@
 package com.kulkard1.advent2022.day12;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.*;
 
@@ -12,8 +13,9 @@ public class GridCoordinate {
 
     private final short value;
 
+    @EqualsAndHashCode.Exclude
     private boolean visited;
-
+    @EqualsAndHashCode.Exclude
     private short depth;
 
     public int getWeight() {

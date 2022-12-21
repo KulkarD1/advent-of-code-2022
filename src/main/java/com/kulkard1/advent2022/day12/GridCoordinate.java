@@ -78,7 +78,6 @@ public class GridCoordinate {
         left.ifPresent(possibleMoves::add);
         up.ifPresent(possibleMoves::add);
         down.ifPresent(possibleMoves::add);
-        possibleMoves.forEach(gridCoordinate -> gridCoordinate.setDepth((short) (this.getDepth() + 1)));
         return possibleMoves;
     }
 }

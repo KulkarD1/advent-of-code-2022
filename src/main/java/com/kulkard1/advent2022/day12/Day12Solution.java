@@ -46,8 +46,13 @@ public class Day12Solution {
                 currentCoordinate.setVisited(true);
                 List<GridCoordinate> possiblePaths = currentCoordinate.getPossiblePaths(grid);
                 short currentDepth = currentCoordinate.getDepth();
-                possiblePaths.forEach(gridCoordinate -> gridCoordinate.setDepth((short) (currentDepth + 1)));
-                queue.addAll(possiblePaths);
+                possiblePaths.forEach(gridCoordinate -> {
+                    if(gridCoordinate.getDepth() == 0 || gridCoordinate.getDepth() > currentDepth + 1) {
+                        queue.remove(gridCoordinate);
+                        gridCoordinate.setDepth((short) (currentDepth + 1));
+                        queue.add(gridCoordinate);
+                    }
+                });
             }
         }
         return likelyCoordinate;

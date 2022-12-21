@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class Day12Solution {
     public static void main(String[] args) throws URISyntaxException, IOException {
         try (final Stream<String> linesStream = Files.lines(Paths.get(ClassLoader.getSystemResource("day-12-input").toURI()))) {
@@ -27,8 +29,9 @@ public class Day12Solution {
                 grid.add(row);
             });
             //System.out.println("grid = " + grid);
-            GridCoordinate end = search(start.get(), grid).orElseThrow();
-            System.out.println(end);
+            GridCoordinate endShortestDepth = search(start.get(), grid).orElseThrow();
+            System.out.println(endShortestDepth);
+            assertEquals(447, endShortestDepth.getDepth());
         }
     }
 

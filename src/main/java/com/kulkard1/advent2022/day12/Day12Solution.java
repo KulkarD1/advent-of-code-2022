@@ -30,7 +30,7 @@ public class Day12Solution {
             });
             GridCoordinate endShortestDepth = search(start.get(), grid).orElseThrow();
             System.out.println(endShortestDepth);
-            assertEquals(447, endShortestDepth.getDepth());
+            assertEquals(446, endShortestDepth.getDepth());
         }
     }
 

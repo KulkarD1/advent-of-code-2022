@@ -18,10 +18,6 @@ public class GridCoordinate {
     @EqualsAndHashCode.Exclude
     private short depth;
 
-    public int getWeight() {
-        return row + column - depth;
-    }
-
     public int getElevation() {
         return switch (value) {
             case 83 ->  97;
@@ -33,7 +29,7 @@ public class GridCoordinate {
     public Optional<GridCoordinate> moveRight(List<List<GridCoordinate>> grid) {
         if(column + 1 < grid.get(row).size()) {
             GridCoordinate right = grid.get(row).get(column + 1);
-            if(!right.isVisited() && right.getElevation() - this.getElevation() < 2) {
+            if(!right.isVisited() && this.getElevation() - right.getElevation() < 2) {
                 return Optional.of(right);
             }
         }
@@ -43,7 +39,7 @@ public class GridCoordinate {
     public Optional<GridCoordinate> moveLeft(List<List<GridCoordinate>> grid) {
         if(column - 1 >= 0) {
             GridCoordinate left = grid.get(row).get(column - 1);
-            if(!left.isVisited() && left.getElevation() - this.getElevation() < 2) {
+            if(!left.isVisited() && this.getElevation() - left.getElevation() < 2) {
                 return Optional.of(left);
             }
         }
@@ -53,7 +49,7 @@ public class GridCoordinate {
     public Optional<GridCoordinate> moveUp(List<List<GridCoordinate>> grid) {
         if(row - 1 >= 0) {
             GridCoordinate up = grid.get(row - 1).get(column);
-            if(!up.isVisited() && up.getElevation() - this.getElevation() < 2) {
+            if(!up.isVisited() && this.getElevation() - up.getElevation() < 2) {
                 return Optional.of(up);
             }
         }
@@ -63,7 +59,7 @@ public class GridCoordinate {
     public Optional<GridCoordinate> moveDown(List<List<GridCoordinate>> grid) {
         if(row + 1 < grid.size()) {
             GridCoordinate down = grid.get(row + 1).get(column);
-            if(!down.isVisited() && down.getElevation() - this.getElevation() < 2) {
+            if(!down.isVisited() && this.getElevation() - down.getElevation() < 2) {
                 return Optional.of(down);
             }
         }

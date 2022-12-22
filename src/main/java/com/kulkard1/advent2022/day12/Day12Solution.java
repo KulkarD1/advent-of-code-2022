@@ -21,7 +21,7 @@ public class Day12Solution {
                 final List<GridCoordinate> row = IntStream.range(0, line.length())
                         .mapToObj(column -> new GridCoordinate((short) grid.size(), (short) column, (short) line.charAt(column)))
                         .peek(gridCoordinate -> {
-                            if(gridCoordinate.getValue() == 83) {
+                            if(gridCoordinate.getValue() == 69) {
                                 start.set(gridCoordinate);
                             }
                         })
@@ -35,14 +35,14 @@ public class Day12Solution {
     }
 
     public static Optional<GridCoordinate> search(GridCoordinate root, List<List<GridCoordinate>> grid) {
-        Queue<GridCoordinate> queue = new PriorityQueue<>(1000000000, Comparator.comparing(GridCoordinate::getWeight).reversed());
-        //Queue<GridCoordinate> queue = new ArrayDeque<>(1000000000);
+        //Queue<GridCoordinate> queue = new PriorityQueue<>(1000000000, Comparator.comparing(GridCoordinate::getWeight).reversed());
+        Queue<GridCoordinate> queue = new ArrayDeque<>(1000000000);
         Optional<GridCoordinate> likelyCoordinate = Optional.empty();
         queue.add(root);
         GridCoordinate currentCoordinate;
         while(!queue.isEmpty()) {
             currentCoordinate = queue.remove();
-            if(currentCoordinate.getValue() == 69) {
+            if(currentCoordinate.getValue() == 97) {
                 return Optional.of(currentCoordinate);
             } else {
                 currentCoordinate.setVisited(true);
